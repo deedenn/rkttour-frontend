@@ -75,7 +75,7 @@ export default function AdminPanel({ onExit }) {
 
   return (
     <div className="bg-gradient-to-br from-sky-50 to-indigo-50 py-16">
-      <div className="mx-auto max-w-7xl space-y-8 px-4">
+      <div className="container space-y-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="flex size-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white"><Settings /></div>
@@ -89,11 +89,11 @@ export default function AdminPanel({ onExit }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div className="text-slate-500">Посещений</div><div className="mt-1 text-3xl font-extrabold">{summary.visits}</div></div>
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div className="text-slate-500">Взаимодействий</div><div className="mt-1 text-3xl font-extrabold">{summary.interactions}</div></div>
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div className="text-slate-500">Заявок</div><div className="mt-1 text-3xl font-extrabold">{summary.applications}</div></div>
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div className="text-slate-500">Событий виджета</div><div className="mt-1 text-3xl font-extrabold">{summary.events}</div></div>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm"><div className="text-slate-500 text-sm">Посещений</div><div className="mt-1 text-2xl md:text-3xl font-extrabold">{summary.visits}</div></div>
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm"><div className="text-slate-500 text-sm">Взаимодействий</div><div className="mt-1 text-2xl md:text-3xl font-extrabold">{summary.interactions}</div></div>
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm"><div className="text-slate-500 text-sm">Заявок</div><div className="mt-1 text-2xl md:text-3xl font-extrabold">{summary.applications}</div></div>
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm"><div className="text-slate-500 text-sm">Событий виджета</div><div className="mt-1 text-2xl md:text-3xl font-extrabold">{summary.events}</div></div>
         </div>
 
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -110,7 +110,34 @@ export default function AdminPanel({ onExit }) {
 
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-4 text-lg font-semibold">Заявки</div>
-          <div className="overflow-x-auto">
+
+          {/* Mobile cards */}
+          <div className="space-y-4 md:hidden">
+            {apps.map((a) => (
+              <div key={a._id} className="rounded-2xl border border-slate-200 p-4">
+                <div className="text-slate-500 text-sm">{fmtDateTime(a.ts)}</div>
+                <div className="mt-1 font-semibold">{a.name}</div>
+                {a.message && <div className="text-slate-600 mt-1">{a.message}</div>}
+                <div className="mt-2 text-sm text-slate-600">
+                  <div><span className="font-medium">Контакты:</span> {a.email || '—'} {a.phone ? `• ${a.phone}` : ''}</div>
+                  <div><span className="font-medium">Направление:</span> {a.destination || '—'}</div>
+                  <div><span className="font-medium">Даты:</span> {a.dates || '—'}</div>
+                  <div><span className="font-medium">Бюджет:</span> {a.budget ? fmtMoney(Number(a.budget)) : '—'}</div>
+                </div>
+                <div className="mt-3">
+                  <select value={a.status} onChange={(e) => changeStatus(a._id, e.target.value)} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2">
+                    {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
+              </div>
+            ))}
+            {apps.length === 0 && (
+              <div className="rounded-2xl border border-slate-200 p-6 text-center text-slate-500">Пока нет заявок</div>
+            )}
+          </div>
+
+          {/* Desktop table */}
+          <div className="overflow-x-auto hidden md:block">
             <table className="min-w-full text-sm">
               <thead>
                 <tr className="border-b">

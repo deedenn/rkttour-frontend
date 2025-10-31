@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 export default function TimewebAIEmbed() {
   useEffect(() => {
     const id = 'tw-ai-embed-96f1576c';

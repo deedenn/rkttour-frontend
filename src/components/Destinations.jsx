@@ -14,26 +14,41 @@ const fmtMoney = (n) => new Intl.NumberFormat('ru-RU', { style: 'currency', curr
 
 export default function Destinations() {
   return (
-    <section id="destinations" className="mx-auto max-w-7xl px-4 py-16">
+    <section id="destinations" className="container py-16">
       <div className="mb-8">
-        <h2 className="text-3xl font-extrabold tracking-tight">Популярные направления</h2>
+        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Популярные направления</h2>
         <p className="mt-2 text-slate-600">Подберите идеальный тур в один клик</p>
       </div>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {seedTours.map((t, idx) => (
-          <motion.div key={t.id} initial={{ y: 10, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.05 * idx }} className="group overflow-hidden rounded-3xl border border-slate-200">
-            <div className="relative h-48 w-full">
-              <img src={t.image} alt={t.title} className="h-full w-full object-cover transition group-hover:scale-105" />
+          <motion.div
+            key={t.id}
+            initial={{ y: 10, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.04 * idx }}
+            className="group overflow-hidden rounded-3xl border border-slate-200"
+          >
+            <div className="relative h-44 w-full sm:h-52 md:h-60">
+              <img
+                loading="lazy"
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 42vw, 30vw"
+                src={t.image}
+                alt={t.title}
+                className="h-full w-full object-cover transition group-hover:scale-105"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-3 left-3 text-white">
                 <div className="flex items-center gap-2 text-sm opacity-90"><MapPin className="size-4" /> {t.country}</div>
-                <div className="mt-1 text-xl font-bold">{t.title}</div>
+                <div className="mt-1 text-lg font-bold sm:text-xl">{t.title}</div>
               </div>
               <div className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-sm font-semibold">от {fmtMoney(t.price)}</div>
             </div>
             <div className="p-4">
               <div className="text-slate-600">{t.nights} ночей • рейтинг {t.rating}</div>
-              <a href="#" className="mt-3 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 px-5 py-3 font-semibold text-white"><Sparkles className="size-4" /> Подобрать</a>
+              <a href="#contacts" className="mt-3 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 px-5 py-3 font-semibold text-white">
+                <Sparkles className="size-4" /> Подобрать
+              </a>
             </div>
           </motion.div>
         ))}

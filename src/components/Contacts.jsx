@@ -4,7 +4,7 @@ export default function Contacts() {
   return (
     <footer id="contacts" className="relative isolate overflow-hidden bg-slate-900 py-16 text-slate-100">
       <div className="absolute -right-24 -top-24 h-[500px] w-[500px] rounded-full bg-sky-500/20 blur-3xl" />
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 md:grid-cols-2">
+      <div className="container grid grid-cols-1 gap-10 md:grid-cols-2">
         <div>
           <div className="flex items-center gap-3">
             <div className="flex size-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white"><Plane /></div>

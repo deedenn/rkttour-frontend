@@ -8,13 +8,13 @@ export default function Reviews() {
   ];
   return (
     <section id="reviews" className="bg-gradient-to-br from-sky-50 to-indigo-50 py-16">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="container">
         <h2 className="text-3xl font-extrabold tracking-tight">Отзывы клиентов</h2>
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
           {items.map((r, i) => (
             <motion.div key={r.name} initial={{ y: 12, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="mb-4 flex items-center gap-3">
-                <img src={r.avatar} alt={r.name} className="size-12 rounded-full object-cover" />
+                <img src={r.avatar} alt={r.name} className="size-12 rounded-full object-cover" loading="lazy" />
                 <div className="font-semibold">{r.name}</div>
               </div>
               <div className="text-slate-600">{r.text}</div>
