@@ -1,33 +1,67 @@
+// frontend/src/components/Hero.jsx
 import { motion } from 'framer-motion';
 import { Sparkles, Star } from 'lucide-react';
+import { openAgentWithPrompt } from '../utils/agent';
 
 export default function Hero() {
+  const startPrompt =
+    'Подбери тур на лучший отдых. Укажи 3–5 направлений и уточни даты, бюджет и предпочтения (пляж/экскурсии/город, семья/пара/соло).';
+
   return (
     <section className="relative isolate overflow-hidden pt-24">
       <div className="absolute -top-24 right-0 -z-10 h-[600px] w-[600px] rounded-full bg-sky-200 blur-3xl opacity-60 md:h-[800px] md:w-[800px]" />
       <div className="absolute -left-24 top-48 -z-10 h-[420px] w-[420px] rounded-full bg-indigo-200 blur-3xl opacity-60 md:h-[600px] md:w-[600px]" />
 
       <div className="container grid grid-cols-1 items-center gap-10 py-8 md:grid-cols-2 md:py-14">
-        <motion.div initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <span className="mb-4 inline-flex items-center gap-1 rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-sky-700">Агентство ярких путешествий</span>
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="mb-4 inline-flex items-center gap-1 rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-sky-700">
+            Агентство ярких путешествий
+          </span>
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-            Подберём тур на <span className="bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">лучший отдых</span>
+            Подберём тур на{' '}
+            <span className="bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">
+              лучший отдых
+            </span>
           </h1>
           <p className="mt-4 text-base text-slate-600 sm:text-lg">
-            RKT Tour — ваш персональный гайд в мире путешествий. Расскажите о мечте — и наш AI-агент предложит идеальные варианты.
+            RKT Tour — ваш персональный гайд в мире путешествий. Расскажите о мечте — и наш AI-агент
+            предложит идеальные варианты.
           </p>
+
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a href="#destinations" className="inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white shadow-lg shadow-black/20 bg-gradient-to-r from-sky-500 to-indigo-600">
-              <Sparkles className="size-5" /> Начать подбор
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                openAgentWithPrompt(startPrompt);
+              }}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white shadow-lg shadow-black/20 bg-gradient-to-r from-sky-500 to-indigo-600"
+            >
+              <Sparkles className="size-5" />
+              Начать подбор
             </a>
           </div>
+
           <div className="mt-6 flex items-center gap-4 text-slate-600">
-            <div className="flex items-center gap-2"><Star className="size-5 text-yellow-400" /><span>4.9 / 5</span></div>
+            <div className="flex items-center gap-2">
+              <Star className="size-5 text-yellow-400" />
+              <span>4.9 / 5</span>
+            </div>
             <div>1000+ довольных путешественников</div>
           </div>
         </motion.div>
 
-        <motion.div initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}>
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {[
               'photo-1507525428034-b723cf961d3e',
@@ -35,7 +69,7 @@ export default function Hero() {
               'photo-1505764706515-aa95265c5abc',
               'photo-1473625247510-8ceb1760943f',
               'photo-1542038784456-1ea8e935640e',
-              'photo-1511732351157-1865efcb7b7b'
+              'photo-1511732351157-1865efcb7b7b',
             ].map((id, i) => (
               <motion.div
                 key={id}
@@ -43,7 +77,8 @@ export default function Hero() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.06 * i }}
-                className={`relative h-28 overflow-hidden rounded-2xl sm:h-32 md:h-36 ${i % 3 === 0 ? 'sm:col-span-2' : ''}`}
+                className={`relative h-28 overflow-hidden rounded-2xl sm:h-32 md:h-36 ${i % 3 === 0 ? 'sm:col-span-2' : ''
+                  }`}
               >
                 <img
                   loading="lazy"

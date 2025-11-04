@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import AgentDrawer from './components/AgentDrawer.jsx';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
 import Destinations from './components/Destinations.jsx';
@@ -12,12 +13,13 @@ import { api } from './api';
 export default function App() {
   const [adminMode, setAdminMode] = useState(false);
   useEffect(() => {
-    api.recordVisit({ path: window.location.hash || '/', referrer: document.referrer || '-', ua: navigator.userAgent }).catch(() => {});
+    api.recordVisit({ path: window.location.hash || '/', referrer: document.referrer || '-', ua: navigator.userAgent }).catch(() => { });
   }, []);
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <TimewebAIEmbed />
+      <AgentDrawer />
       <TimewebAIEventBridge />
       {!adminMode ? (
         <>
@@ -28,7 +30,7 @@ export default function App() {
           <Contacts />
         </>
       ) : (
-          <AdminPanel onExit={() => setAdminMode(false)} />
+        <AdminPanel onExit={() => setAdminMode(false)} />
       )}
     </div>
   );
